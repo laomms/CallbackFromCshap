@@ -10,6 +10,7 @@ namespace ManagedDll
 {
     public class Class1
     {
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate bool DelegateFunc(string data1, string data2);
 
         public static DelegateFunc GetResult = null;

@@ -11,7 +11,7 @@ namespace ManagedDll
     public class Class1
     {
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate bool DelegateFunc(string data1, string data2);
+        public delegate bool DelegateFunc([MarshalAs(UnmanagedType.LPStr)] string data1, [MarshalAs(UnmanagedType.LPStr)] string data2);
 
         public static DelegateFunc GetResult = null;
         [DllExport("CallbackFunction", CallingConvention = CallingConvention.Cdecl)]
@@ -25,7 +25,7 @@ namespace ManagedDll
 
         
         [DllExport("FuncTest", CallingConvention = CallingConvention.Cdecl)]
-        public static bool FuncTest(string data1, string data2)
+        public static bool FuncTest([MarshalAs(UnmanagedType.LPStr)] string data1, [MarshalAs(UnmanagedType.LPStr)] string data2)
         {
             GetResult(data2,data1);
             return true;

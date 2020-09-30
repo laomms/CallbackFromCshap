@@ -1,8 +1,8 @@
 ﻿#include <Windows.h>
 #include <iostream>
 
-typedef bool(*FuncTest)(const char* data, const char* data2);
-typedef bool(*functionPointer)(const char* data, const char* data2);
+typedef bool(*FuncTest)(const char* data1, const char* data2);
+typedef bool(*functionPointer)(const char* data1, const char* data2);
 typedef bool(*CallbackFunction)(functionPointer callback);
 
 

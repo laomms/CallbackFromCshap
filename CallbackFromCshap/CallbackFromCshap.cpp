@@ -1,15 +1,16 @@
 ﻿#include <Windows.h>
 #include <iostream>
+#include <string> 
 
-typedef bool(*FuncTest)(const char* data1, const char* data2);
-typedef bool(*functionPointer)(const char* data1, const char* data2);
+typedef bool(*FuncTest)(const char* data1, int data2);
+typedef bool(*functionPointer)(const char* data1, int data2);
 typedef bool(*CallbackFunction)(functionPointer callback);
 
 
-bool realFunction(const char* data1, const char* data2)
+bool realFunction(const char* data1, int data2)
 {
     std::cout << data1  << "\n";
-    std::cout << data2 << "\n";
+    std::cout << std::to_string(data2) << "\n";
     return true;
 }
 
@@ -28,7 +29,7 @@ int main()
         FuncTest pFuncTest = (FuncTest)GetProcAddress(hDll, "FuncTest");
         if (pFuncTest != NULL)
         {
-            pFuncTest("测试数据1", "测试数据2");
+            pFuncTest("测试数据1", 500);
         }
     }
     system("pause");

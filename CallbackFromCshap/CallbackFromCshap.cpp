@@ -2,16 +2,16 @@
 #include <iostream>
 #include <string> 
 
-typedef bool(*FuncTest)(const char* data1, int data2);
-typedef bool(*functionPointer)(const char* data1, int data2);
-typedef bool(*CallbackFunction)(functionPointer callback);
+typedef const char* (*FuncTest)(const char* data1, int data2);
+typedef const char* (*functionPointer)(const char* data1, int data2);
+typedef const char* (*CallbackFunction)(functionPointer callback);
 
 
-bool realFunction(const char* data1, int data2)
+const char* realFunction(const char* data1, int data2)
 {
     std::cout << data1  << "\n";
     std::cout << std::to_string(data2) << "\n";
-    return true;
+    return data1;
 }
 
 
@@ -23,13 +23,15 @@ int main()
         CallbackFunction DLLFuncPtr = (CallbackFunction)GetProcAddress(hDll, "CallbackFunction");
         if (DLLFuncPtr != NULL)
         {
-            DLLFuncPtr(&realFunction);
+            const char* ret =DLLFuncPtr(&realFunction);
+            std::cout << ret << "\n";
         }
 
         FuncTest pFuncTest = (FuncTest)GetProcAddress(hDll, "FuncTest");
         if (pFuncTest != NULL)
         {
-            pFuncTest("测试数据1", 500);
+            const char*  res =pFuncTest("测试数据1", 500);
+            std::cout << res << "\n";
         }
     }
     system("pause");
